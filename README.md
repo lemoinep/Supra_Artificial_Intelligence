@@ -76,7 +76,7 @@ For a neural network layer with weight matrix $W$ and input $X$, tensor parallel
 - **NCCL Synchronization:** The final output $Y$ is obtained via a collective **All-Reduce** (sum) operation to synchronize activations across cores:
 
 $$
-Y = \text{NCCL\_AllReduce}\left(\sum_{i=1}^{k} Y_i\right)
+Y = \mathrm{NCCL\_AllReduce}\left(\sum_{i=1}^{k} Y_i\right)
 $$
 
 ### 3. Pipeline Parallelism
@@ -98,7 +98,7 @@ The hierarchy of communicators allows for segmenting the cluster by model.
 - **Communicator Splitting:** Let $\mathcal{C}_{global}$ be the initial NCCL communicator. Creating a subgroup for model $m$ follows the splitting logic:
 
 $$
-\mathcal{C}_m = \text{NCCL\_CommSplit}(\mathcal{C}_{global}, \text{color}_m, \text{rank})
+\mathcal{C}_m = \mathrm{NCCL\_CommSplit}(\mathcal{C}_{global}, \text{color}_m, \text{rank})
 $$
 
 where $\text{color}_m$ is the unique identifier of the resource group dedicated to model $m$.
@@ -110,7 +110,7 @@ Dynamic weight updates via NCCL can be modeled as a broadcast operation.
 - **Broadcast Operation:** Let $\Delta W$ be the LoRA adapter weight matrix present on the root rank. Synchronization to all members of group $G_m$ is defined by:
 
 $$
-\forall w_i \in G_m : \Delta W_i = \text{NCCL\_Broadcast}(\Delta W_{root})
+\forall w_i \in G_m : \Delta W_i = \mathrm{NCCL\_Broadcast}(\Delta W_{root})
 $$
 
 This ensures that $\Delta W_1 = \Delta W_2 = \dots = \Delta W_k$ atomically for the inference group.
