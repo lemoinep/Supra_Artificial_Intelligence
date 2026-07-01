@@ -10,6 +10,14 @@ High-Performance Multi-GPU LLM Serving Architecture
 ---
 
 <p align="center">
+<img src="Images/P0000.jpg" width="100%" />
+</p>
+
+---
+
+---
+
+<p align="center">
 <img src="Images/P0001.jpg" width="100%" />
 </p>
 
