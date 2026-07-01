@@ -1,7 +1,7 @@
 # Supra Artificial Intelligence : 
 High-Performance Multi-GPU LLM Serving Architecture
 
-[![Version](https://img.shields.io/badge/version-0.9-green.svg)](https://github.com/lemoinep/Business-Strategic-Market-Simulator)
+[![Version](https://img.shields.io/badge/version-0.9-green.svg)](https://github.com/lemoinep/Supra_Artificial_Intelligence)
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 [![Python](https://img.shields.io/badge/python-3.12%2B-blue.svg)](https://www.python.org/)
 [![C++](https://img.shields.io/badge/c%2B%2B-yes-green.svg)](https://www.cppreference.com/)
@@ -148,10 +148,32 @@ For optimal performance, the native backend must be compiled with specific flags
 * CUDA\_VISIBLE\_DEVICES: Used to manage GPU visibility per process.
 * C++17 standard or higher for modern concurrency support.
 
+## For more information
 
+<p align="center">
+<img src="Images/Z20260701_000001.jpg" width="100%" />
+<img src="Images/Z20260701_000002.jpg" width="100%" />
+<img src="Images/Z20260701_000003.jpg" width="100%" />
+<img src="Images/Z20260701_000004.jpg" width="100%" />
+<img src="Images/Z20260701_000005.jpg" width="100%" />
+<img src="Images/Z20260701_000006.jpg" width="100%" />
+<img src="Images/Z20260701_000007.jpg" width="100%" />
+<img src="Images/Z20260701_000008.jpg" width="100%" />
+<img src="Images/Z20260701_000009.jpg" width="100%" />
+<img src="Images/Z20260701_000010.jpg" width="100%" />
+
+<img src="Images/Z20260701_000011.jpg" width="100%" />
+<img src="Images/Z20260701_000012.jpg" width="100%" />
+<img src="Images/Z20260701_000013.jpg" width="100%" />
+<img src="Images/Z20260701_000014.jpg" width="100%" />
+<img src="Images/Z20260701_000016.jpg" width="100%" />
+</p>
 
 ***
 ---
+
+
+**Note: This is currently in the development phase. Further development is still required to make it operational...**
 
 ## 📝 **Author**
 
