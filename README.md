@@ -52,6 +52,54 @@ The Supra AI system is engineered to utilize the full bandwidth of modern hardwa
 
 2. **Horizontal Scaling:**  Serving a high volume of concurrent requests by distributing the load across a cluster of inference workers.
 
+## Mathematical Formulation
+
+### 1. Orchestration Modeling (Gateway and Workers)
+Let $\mathcal{S}$ be the system composed of a Gateway $G$ (rank 0) and a set of Workers $W = \{w_1, w_2, \dots, w_n\}$.
+
+*   **Request Stream:** An incoming request $r$ is defined as the tuple $r = \langle id, m, p, \delta \rangle$, where $id$ is the unique identifier, $m$ is the target model, $p$ is the priority, and $\delta$ represents the content (prompt).
+*   **Scheduling Function ($f_{sched}$):** The scheduler determines the assignment $A$ of a request to a worker $w_i$ by minimizing the expected latency $L$:
+    $$A(r) = \arg\min_{w_i \in G_m} L(w_i, \rho_i)$$
+    where $G_m \subset W$ is the group of GPUs assigned to model $m$, and $\rho_i$ represents the current load of worker $w_i$.
+
+### 2. Tensor Parallelism
+For a neural network layer with weight matrix $W$ and input $X$, tensor parallelism distributes the computation across $k$ GPUs.
+
+*   **Partitioning:** The weight matrix is partitioned into $k$ shards: $W = [W_1, W_2, \dots, W_k]$.
+*   **Local Computation:** Each GPU $i$ calculates a partial result: $Y_i = X \cdot W_i$.
+*   **NCCL Synchronization:** The final output $Y$ is obtained via a collective **All-Reduce** (sum) operation to synchronize activations across cores:
+    
+    $$Y = \text{NCCL\_AllReduce} \left( \sum_{i=1}^{k} Y_i \right)$$.
+
+### 3. Pipeline Parallelism
+The model is divided into $S$ stages, distributed across different nodes or GPUs.
+
+*   **Computation Sequence:** Let $L_j$ be the set of layers in stage $j$. The activation transfer $a$ between stage $j$ and $j+1$ is expressed as:
+    $$a_{j \to j+1} = \text{Comm}_{\text{p2p}}(L_j(a_{j-1}))$$
+    where $\text{Comm}_{\text{p2p}}$ represents a point-to-point transfer (via NCCL or MPI).
+
+### 4. Topology and Communication Groups
+The hierarchy of communicators allows for segmenting the cluster by model.
+
+*   **Communicator Splitting:** Let $\mathcal{C}_{global}$ be the initial NCCL communicator. Creating a subgroup for model $m$ follows the splitting logic:
+    $$\mathcal{C}_m = \text{NCCL\_CommSplit}(\mathcal{C}_{global}, \text{color}_m, \text{rank})$$
+    where $\text{color}_m$ is the unique identifier of the resource group dedicated to model $m$.
+
+### 5. LoRA Adapter Diffusion
+Dynamic weight updates (lightweight fine-tuning) via NCCL can be modeled as a broadcast operation.
+
+*   **Broadcast Operation:** Let $\Delta W$ be the LoRA adapter weight matrix present on the root rank ($root$). Synchronization to all members of group $G_m$ is defined by:
+    $$\forall w_i \in G_m : \Delta W_i = \text{NCCL\_Broadcast}(\Delta W_{root})$$
+    This ensures that $\Delta W_1 = \Delta W_2 = \dots = \Delta W_k$ atomically for the inference group.
+
+### 6. Scheduler Optimization (Shortest Job First)
+The intelligent scheduler aims to maximize throughput by favoring shorter requests.
+
+*   **Priority Score ($S_r$):**
+    $$S_r = \alpha \cdot p_r + \beta \cdot \frac{1}{\text{len}(\delta_r)}$$
+    The scheduler processes requests in descending order of $S_r$, where $\text{len}(\delta_r)$ is the estimated generation length, thereby reducing average waiting time in the queue.
+	
+
 ## Core System Architecture
 
 The system operates on a logical rank-based architecture initialized via MPI and optimized by NCCL.
@@ -94,7 +142,7 @@ Library,Primary Responsibility,Data Types Transferred
 
 - **Pipeline Parallelism (Inter-node):**  Transformer blocks are distributed across different nodes. Activations pass from one stage to the next, reducing the VRAM pressure on individual nodes at the cost of slight latency increases.
 
- Technical Component Breakdown
+## Technical Component Breakdown
 
 The project is structured into modular C++ components, each handling a specific facet of the multi-GPU environment.
 
@@ -116,7 +164,7 @@ The project is structured into modular C++ components, each handling a specific 
 
 ## Advanced "Supra IA" Features
 
-## Model Topology and Sub-Communicators
+### Model Topology and Sub-Communicators
 
 The system supports a configurable mapping of Model IDs to specific GPU ranks via JSON. This allows the cluster to be segmented dynamically:
 
@@ -124,7 +172,7 @@ The system supports a configurable mapping of Model IDs to specific GPU ranks vi
 
 - **Communicator Splitting:**  Using MPI\_Comm\_split or ncclCommSplit, the system creates isolated communication environments for each model, preventing cross-model interference.
 
-## Synchronized Weight Updates (LoRA)
+### Synchronized Weight Updates (LoRA)
 
 To support fine-tuned or specialized adapters, the system includes a NCCL-based weight transfer engine:
 
