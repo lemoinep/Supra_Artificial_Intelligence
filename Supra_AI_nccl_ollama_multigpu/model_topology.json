@@ -1,0 +1,16 @@
+{
+  "models": [
+    {
+      "model_id": "default",
+      "ranks": [1, 2]
+    },
+    {
+      "model_id": "chat",
+      "ranks": [1]
+    },
+    {
+      "model_id": "code",
+      "ranks": [2]
+    }
+  ]
+}
