@@ -26,7 +26,9 @@ High-Performance Multi-GPU LLM Serving Architecture
 ---
 
 
-The "Supra Artificial Intelligence" project is a high-performance framework designed for serving Large Language Models (LLMs) across multiple GPUs and nodes. By leveraging the  **NCCL (NVIDIA Collective Communications Library)**  and  **C++ orchestration** , the system achieves optimized tensor and pipeline parallelism. The architecture transitions from a basic gateway orchestrating external Ollama instances to a "NCCL-intensive" native backend using llama.cpp.Key takeaways include:
+The "Supra Artificial Intelligence" project is a high-performance framework designed for serving Large Language Models (LLMs) across multiple GPUs and nodes. By leveraging the  **NCCL (NVIDIA Collective Communications Library)**  and  **C++ orchestration** , the system achieves optimized tensor and pipeline parallelism. The architecture evolves from a gateway that proxies external Ollama instances toward a native, NCCL‑intensive backend built around llama.cpp and GGML/CUDA support.
+
+Key takeaways:
 
 - **Hierarchical Orchestration:**  A C++ Gateway (Rank 0) manages routing and scheduling, while Workers (Ranks 1..N) handle heavy inference tasks.
 
@@ -35,6 +37,13 @@ The "Supra Artificial Intelligence" project is a high-performance framework desi
 - **Dynamic Resource Management:**  A dedicated ModelTopology system partitions the GPU cluster into specialized groups based on model requirements.
 
 - **Production-Ready Features:**  The architecture incorporates thread-safe scheduling, an OpenAI-compatible HTTP API, and synchronized weight updates for LoRA adapters via NCCL.
+
+Global architectural goals
+
+- VRAM pooling: support loading and serving models whose size exceeds the memory of any single GPU by sharding weights across multiple GPUs and nodes.
+
+- Horizontal scaling: support high concurrency by distributing inference requests across a flexible pool of inference workers and model groups
+
 
 The Supra AI architecture represents therefore a significant advancement in distributed LLM serving. By combining the flexibility of a C++ Gateway with the raw performance of NCCL collectives, the system provides a robust framework for complex, multi-model AI clusters. The modular design ensures that as hardware and model requirements evolve, the core orchestration logic remains scalable and efficient.
 
