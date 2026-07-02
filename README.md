@@ -3,9 +3,11 @@ High-Performance Multi-GPU LLM Serving Architecture
 
 [![Version](https://img.shields.io/badge/version-0.9-green.svg)](https://github.com/lemoinep/Supra_Artificial_Intelligence)
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
-[![Python](https://img.shields.io/badge/python-3.12%2B-blue.svg)](https://www.python.org/)
-[![C++](https://img.shields.io/badge/c%2B%2B-yes-green.svg)](https://www.cppreference.com/)
-
+[![C++17](https://img.shields.io/badge/c%2B%2B-17-blue.svg)](https://en.cppreference.com/wcpp17)
+[![llama.cpp](https://img.shields.io/badge/llama.cpp-yes-orange.svg)](https://github.com/ggml-org/llama.cpp)
+[![MPI](https://img.shields.io/badge/MPI-yes-blue.svg)](https://www.open-mpi.org/)
+[![CUDA](https://img.shields.io/badge/CUDA-yes-yellow.svg)](https://developer.nvidia.com/cuda-toolkit)
+[![NCCL](https://img.shields.io/badge/NCCL-yes-red.svg)](https://developer.nvidia.com/nccl)
 
 ---
 
