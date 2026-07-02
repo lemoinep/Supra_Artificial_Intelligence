@@ -277,7 +277,7 @@ For optimal performance, the native backend must be compiled with specific flags
 ---
 
 
-**Note: This is currently in the development phase. Further development is still required to make it operational...**
+**Note: This project is currently in the development phase. Further work is required to make it fully operational and production‑ready. I invite you to follow its evolution: the final goal is to deliver an efficient and robust product.**
 
 ## 📝 **Author**
 
