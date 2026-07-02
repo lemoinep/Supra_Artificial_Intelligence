@@ -1,11 +1,12 @@
+# Update for my repo
+
 cmake_minimum_required(VERSION 3.20)
 
-project(nccl_ollama_multigpu
+project(Supra_AI_nccl_ollama_multigpu
         LANGUAGES CXX CUDA)
 
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
-
 
 option(BUILD_WITH_CUDA "Build with CUDA support" ON)
 
@@ -15,19 +16,36 @@ message(STATUS "MPI include dirs: ${MPI_CXX_INCLUDE_DIRS}")
 message(STATUS "MPI libraries   : ${MPI_CXX_LIBRARIES}")
 
 # -----------------------------------------------------------------------
-# Includes
+# External includes (json, cpp-httplib)
 # -----------------------------------------------------------------------
 set(EXTERNAL_JSON_ROOT "${CMAKE_SOURCE_DIR}/../json")
 set(EXTERNAL_HTTPLIB_ROOT "${CMAKE_SOURCE_DIR}/../cpp-httplib")
 
 include_directories(
-    ${CMAKE_SOURCE_DIR}/include
     ${EXTERNAL_JSON_ROOT}/single_include
+    ${EXTERNAL_HTTPLIB_ROOT}
     ${EXTERNAL_HTTPLIB_ROOT}
     ${MPI_CXX_INCLUDE_DIRS}
     ${LLAMA_INCLUDE_DIR}
 )
 
+# -----------------------------------------------------------------------
+# llama.cpp 
+# -----------------------------------------------------------------------
+
+set(LLAMA_ROOT "${CMAKE_SOURCE_DIR}/../llama.cpp")
+set(LLAMA_INCLUDE_DIR "${LLAMA_ROOT}/include")
+set(LLAMA_LIBRARY_DIR "${LLAMA_ROOT}/build")
+
+find_library(LLAMA_LIB
+    NAMES llama
+    HINTS ${LLAMA_LIBRARY_DIR})
+
+if (NOT LLAMA_LIB)
+    message(WARNING "Could not find libllama. Please adjust LLAMA_LIBRARY_DIR.")
+else()
+    message(STATUS "Found libllama: ${LLAMA_LIB}")
+endif()
 
 # -----------------------------------------------------------------------
 # CUDA & NCCL
@@ -50,26 +68,7 @@ if (BUILD_WITH_CUDA)
 endif()
 
 # -----------------------------------------------------------------------
-# llama.cpp 
-# -----------------------------------------------------------------------
-
-set(LLAMA_ROOT "${CMAKE_SOURCE_DIR}/../llama.cpp")
-set(LLAMA_INCLUDE_DIR "${LLAMA_ROOT}/include")
-# Si tu as build avec CMake dans ${LLAMA_ROOT}/build
-set(LLAMA_LIBRARY_DIR "${LLAMA_ROOT}/build")
-
-find_library(LLAMA_LIB
-    NAMES llama
-    HINTS ${LLAMA_LIBRARY_DIR})
-
-if (NOT LLAMA_LIB)
-    message(WARNING "Could not find libllama. Please adjust LLAMA_LIBRARY_DIR.")
-else()
-    message(STATUS "Found libllama: ${LLAMA_LIB}")
-endif()
-
-# -----------------------------------------------------------------------
-# Includes
+# Project includes
 # -----------------------------------------------------------------------
 include_directories(
     ${CMAKE_SOURCE_DIR}/include
@@ -99,22 +98,20 @@ set(SRC_FILES
     src/main_mpi_nccl.cpp
 )
 
-add_executable(nccl_ollama_multigpu ${SRC_FILES})
-
+add_executable(Supra_AI_nccl_ollama_multigpu ${SRC_FILES})
 
 if (BUILD_WITH_CUDA)
-    set_target_properties(nccl_ollama_multigpu PROPERTIES
+    set_target_properties(Supra_AI_nccl_ollama_multigpu PROPERTIES
         CUDA_SEPARABLE_COMPILATION ON)
 endif()
 
-
-target_link_libraries(nccl_ollama_multigpu
+target_link_libraries(Supra_AI_nccl_ollama_multigpu
     PRIVATE
         MPI::MPI_CXX
 )
 
 if (BUILD_WITH_CUDA)
-    target_link_libraries(nccl_ollama_multigpu
+    target_link_libraries(Supra_AI_nccl_ollama_multigpu
         PRIVATE
             CUDA::cudart
             ${NCCL_LIBRARY}
@@ -122,15 +119,13 @@ if (BUILD_WITH_CUDA)
 endif()
 
 if (LLAMA_LIB)
-    target_link_libraries(nccl_ollama_multigpu
+    target_link_libraries(Supra_AI_nccl_ollama_multigpu
         PRIVATE
             ${LLAMA_LIB}
     )
 endif()
 
-
 if (CMAKE_CXX_COMPILER_ID MATCHES "GNU|Clang")
-    target_compile_options(nccl_ollama_multigpu
+    target_compile_options(Supra_AI_nccl_ollama_multigpu
         PRIVATE -Wall -Wextra -Wpedantic -Wno-unknown-pragmas)
 endif()
-

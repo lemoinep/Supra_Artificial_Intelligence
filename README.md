@@ -226,11 +226,20 @@ The system integrates cpp-httplib and nlohmann/json to expose endpoints:
 
 ### 3. Build Requirements
 
+This project is a C++17 multi‑GPU LLM serving system built on MPI, CUDA, NCCL, and llama.cpp. It also uses header‑only libraries for JSON parsing and HTTP serving.
+
+Clone the repo:
+
+* git clone https://github.com/yhirose/cpp-httplib.git
+* git clone https://github.com/nlohmann/json.git
+
+
 For optimal performance, the native backend must be compiled with specific flags:
 
 * GGML\_CUDA\_NCCL=ON: Enables internal NCCL support within the LLM engine.
 * CUDA\_VISIBLE\_DEVICES: Used to manage GPU visibility per process.
 * C++17 standard or higher for modern concurrency support.
+
 
 ## For more information
 
