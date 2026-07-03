@@ -245,6 +245,21 @@ Clone the repo:
 * git clone https://github.com/nlohmann/json.git
 
 
+This project uses **llama.cpp** as the LLM backend engine.
+* git clone https://github.com/ggml-org/llama.cpp.git
+
+Build after llama.cpp with CUDA + NCCL. Create a build directory and compile:
+
+```bash
+mkdir build && cd build
+cmake .. \
+  -DGGML_CUDA=ON \
+  -DGGML_CUDA_NCCL=ON \
+  -DCMAKE_BUILD_TYPE=Release
+cmake --build . --config Release
+```
+
+
 For optimal performance, the native backend must be compiled with specific flags:
 
 * GGML\_CUDA\_NCCL=ON: Enables internal NCCL support within the LLM engine.
