@@ -291,9 +291,27 @@ For optimal performance, the native backend must be compiled with specific flags
 ***
 ---
 
-**Note: This project is currently in the development phase. Further work is required to make it fully operational and production‑ready. I invite you to follow its evolution: the final goal is to deliver an efficient and robust product.**
+* **Note: This project is currently in the development phase. Further work is required to make it fully operational and production‑ready. I invite you to follow its evolution: the final goal is to deliver an efficient and robust product.**
 
-**The version using RCCL HIP AMD OLLAMA MULTIGPU is also under development. It will incorporate both modes. There will be slight differences compared to the NCCL CUDA NVIDIA OLLAMA MULTIGPU version.**
+* **The version using RCCL HIP AMD OLLAMA MULTIGPU is also under development. It will incorporate both modes. There will be slight differences compared to the NCCL CUDA NVIDIA OLLAMA MULTIGPU version.**
+
+## Future Development
+
+I have been generating a lot of ideas lately—my creativity is at its best. Here is one of them...
+
+The **Supra_AI_HPC_Orchestrator** is currently under development and represents the convergence of Supra Artificial Intelligence and an agent-based HPC scheduler. Its goal is to improve performance and efficiency in hybrid HPC environments (CPU, GPU, TPU, NPU, DPU) by transitioning from traditional static scheduling toward an AI-driven, agentic orchestration paradigm.
+
+This approach introduces a system in which intelligent agents collaborate to optimize resource allocation and execution strategies across heterogeneous infrastructures.
+
+The orchestrator will enable topology-aware and adaptive scheduling, leveraging detailed knowledge of system architecture (CPUs, GPUs, TPUs, NPUs, DPUs, PCIe/NVLink interconnects, and network topology). It takes into account not only system load but also workload characteristics—such as machine learning, simulation, compilation, or serving—as well as latency and energy constraints. Task placement and execution strategies will evolve dynamically based on system state.
+
+The system also provides real-time adaptability. Specialized agents handle perturbations such as hardware failures, workload fluctuations, and preemption by negotiating resource reallocations, rather than relying on static scheduling rules.
+
+In heterogeneous environments, the orchestrator coordinates multiple types of accelerators, each contributing according to its strengths: CPUs manage orchestration and control logic, GPUs handle large-scale parallel computation and training, TPUs support high-throughput inference, NPUs enable energy-efficient embedded AI workloads, and DPUs offload networking, storage, and infrastructure tasks.
+
+At the core of the architecture, Supra Artificial Intelligence acts as a global decision layer, coordinating specialized agents responsible for scheduling, monitoring, profiling, security, and energy management. The system will continuously improve through reinforcement learning and multi-objective optimization, learning from workload patterns and system behavior to refine scheduling policies over time.
+
+
 
 ## 📝 **Author**
 
