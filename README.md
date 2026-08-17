@@ -295,6 +295,7 @@ For optimal performance, the native backend must be compiled with specific flags
 
 * **The version using RCCL HIP AMD OLLAMA MULTIGPU is also under development. It will incorporate both modes. There will be slight differences compared to the NCCL CUDA NVIDIA OLLAMA MULTIGPU version.**
 
+
 ## Future Development
 
 I have been generating a lot of ideas lately—my creativity is at its best. Here is one of them...
