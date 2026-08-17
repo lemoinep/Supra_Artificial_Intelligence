@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.27 (MiKTeX 25.4) (preloaded format=pdflatex 2025.12.2)  13 AUG 2026 10:39
+This is pdfTeX, Version 3.141592653-2.6-1.40.27 (MiKTeX 25.4) (preloaded format=pdflatex 2025.12.2)  17 AUG 2026 15:59
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -279,7 +279,11 @@ LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 16.
 LaTeX Font Info:    ... okay on input line 16.
 
 -- Lines per column: 56 (exact).
-
+LaTeX Font Info:    Trying to load font information for T1+lmtt on input line 1
+7.
+(C:\Users\lemoi\AppData\Local\Programs\MiKTeX\tex/latex/lm\t1lmtt.fd
+File: t1lmtt.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
+)
 Underfull \hbox (badness 10000) in paragraph at lines 23--25
 []\T1/lmr/bx/it/9 Index Terms\T1/lmr/bx/n/9 ---Artificial in-tel-li-gence, mem-
 ory
@@ -368,15 +372,19 @@ Before submitting the final camera ready copy, remember to:
 LaTeX2e <2025-11-01>
 L3 programming layer <2025-11-06>
  ***********
+
+
+LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
+
  ) 
 Here is how much of TeX's memory you used:
- 3186 strings out of 467871
- 51815 string characters out of 5418376
- 460729 words of memory out of 5000000
- 32038 multiletter control sequences out of 15000+600000
- 810781 words of font info for 138 fonts, out of 8000000 for 9000
+ 3229 strings out of 467871
+ 52532 string characters out of 5418376
+ 460903 words of memory out of 5000000
+ 32077 multiletter control sequences out of 15000+600000
+ 811100 words of font info for 139 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 56i,8n,65p,1727b,270s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 56i,8n,65p,1727b,380s stack positions out of 10000i,1000n,20000p,200000b,200000s
 <C:/Users/lemoi/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmbx9.pfb
 ><C:/Users/lemoi/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmbxi10.pf
 b><C:/Users/lemoi/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmcsc10.p
@@ -386,11 +394,12 @@ b><C:/Users/lemoi/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmr12.pfb
 <C:/Users/lemoi/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmr8.pfb><C
 :/Users/lemoi/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmri10.pfb><C
 :/Users/lemoi/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmri8.pfb><C:
-/Users/lemoi/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmsy7.pfb>
+/Users/lemoi/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmsy7.pfb><C:/
+Users/lemoi/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmtt10.pfb>
 Output written on "The Memory Wall as a Structural Limit for Modern.pdf" (4 pag
-es, 265375 bytes).
+es, 290162 bytes).
 PDF statistics:
- 67 PDF objects out of 1000 (max. 8388607)
+ 72 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
  1 words of extra memory for PDF output out of 10000 (max. 10000000)
 
