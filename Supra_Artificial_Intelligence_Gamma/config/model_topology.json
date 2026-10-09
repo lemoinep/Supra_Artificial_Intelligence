@@ -1,0 +1,8 @@
+{
+  "models": [
+    {
+      "model_id": "default",
+      "ranks": [1, 2, 3]
+    }
+  ]
+}
